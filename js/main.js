@@ -20,8 +20,8 @@ function getRandomNumber(min, max) {
 Проверяем максимальную длину строки
 Источник https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/length
  */
-function checkMaxCommentLength(comment, max_length) {
-  if (comment.length <= max_length) {
+function checkMaxCommentLength(comment, maxLength) {
+  if (comment.length <= maxLength) {
     return true;
   }
 
