@@ -14,8 +14,8 @@ const getRandomNumber = (min, max) => {
 const checkMaxCommentLength = (comment, maxLength) => (comment.length <= maxLength);
 
 
-// getRandomNumber();
-// checkMaxCommentLength();
+getRandomNumber();
+checkMaxCommentLength();
 
 //описания фотографий
 const DESCRIPTION = [
@@ -40,7 +40,7 @@ const createPhotoDescription = () => ({
 
 //создание массива с объекатами, добавление id и url
 const getSimilarDescription = () => {
-  let arr = Array.from({length: 25}, createPhotoDescription);
+  const arr = Array.from({length: 25}, createPhotoDescription);
   for (let i = 0; i < arr.length; i++) {
     arr[i].id = i + 1;
     arr[i].url = `photos/${arr[i].id}.jpg`;
