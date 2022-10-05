@@ -6,17 +6,16 @@ const getRandomNumber = (min, max) => {
 
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;  
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 
 };
 
 //Проверяем максимальную длину строки
-const checkMaxCommentLength = (comment, maxLength) => {
-  return comment.length <= maxLength
-};
+const checkMaxCommentLength = (comment, maxLength) => (comment.length <= maxLength);
 
-getRandomNumber();
-checkMaxCommentLength();
+
+// getRandomNumber();
+// checkMaxCommentLength();
 
 //описания фотографий
 const DESCRIPTION = [
@@ -41,13 +40,13 @@ const createPhotoDescription = () => ({
 
 //создание массива с объекатами, добавление id и url
 const getSimilarDescription = () => {
-  arr = Array.from({length: 25}, createPhotoDescription);
+  let arr = Array.from({length: 25}, createPhotoDescription);
   for (let i = 0; i < arr.length; i++) {
     arr[i].id = i + 1;
-    arr[i].url = `photos/${arr[i].id}.jpg`
+    arr[i].url = `photos/${arr[i].id}.jpg`;
   }
 
-  return arr
-}
+  return arr;
+};
 
-getSimilarDescription()
+getSimilarDescription();
