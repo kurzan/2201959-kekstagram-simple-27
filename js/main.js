@@ -11,14 +11,14 @@ const getRandomNumber = (min, max) => {
 };
 
 //Проверяем максимальную длину строки
-const checkMaxCommentLength = (comment, maxLength) => (comment.length <= maxLength);
+const checkMaxCommentLength = (comment, maxLength) => comment.length <= maxLength;
 
 
-getRandomNumber();
-checkMaxCommentLength();
+// getRandomNumber();
+// checkMaxCommentLength();
 
 //описания фотографий
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Это я на рыбалке',
   'Это я на работе',
   'Это я с друзьями',
@@ -30,23 +30,15 @@ const DESCRIPTION = [
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 //создание объекта описания к фото
-const createPhotoDescription = () => ({
-  id: 0,
-  url: '',
-  description: getRandomArrayElement(DESCRIPTION),
+const createPhotoDescription = (index) => ({
+  id: index + 1,
+  url: `photos/${index + 1}.jpg`,
+  description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomNumber(15, 250),
   comments: getRandomNumber(0, 200)
 });
 
 //создание массива с объекатами, добавление id и url
-const getSimilarDescription = () => {
-  const arr = Array.from({length: 25}, createPhotoDescription);
-  for (let i = 0; i < arr.length; i++) {
-    arr[i].id = i + 1;
-    arr[i].url = `photos/${arr[i].id}.jpg`;
-  }
-
-  return arr;
-};
+const getSimilarDescription = () => Array.from({length: 25}, (value, index) => createPhotoDescription(index));
 
 getSimilarDescription();
