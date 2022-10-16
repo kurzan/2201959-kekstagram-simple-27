@@ -1,3 +1,1 @@
-import {getSimilarDescription} from './data.js';
-
-getSimilarDescription();
+import './thumbnails.js';
