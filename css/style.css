@@ -282,6 +282,14 @@ main {
   grid-row: 1 / span 3;
 }
 
+/* стиль для ошибки проверки комментария */
+.form_comment_error {
+  display: block;
+  font-size: 0.85em;
+  color: #c00;
+  text-transform: none;
+}
+
 .img-upload__wrapper {
   margin: 0 auto;
   padding-bottom: 60px;
