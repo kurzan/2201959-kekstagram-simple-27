@@ -1,6 +1,7 @@
 import './thumbnails.js';
 import {commentValidate, uploadPictureForm} from './form-validate.js';
 import {isEscKey} from './util.js';
+import {resetEffects} from './effects.js';
 
 const pictureEditForm = document.querySelector('.img-upload__overlay');
 const uploadPictureButton = document.querySelector('#upload-file');
@@ -28,6 +29,7 @@ function closeEditForm () {
   document.body.classList.remove('modal-open');
 
   uploadPictureButton.value = '';
+  resetEffects();
   document.removeEventListener('keydown', onEscDowm);
   uploadPictureForm.removeEventListener('submit', commentValidate);
 }

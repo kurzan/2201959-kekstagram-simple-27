@@ -9,3 +9,9 @@ effectsRadio.forEach((effect) => {
   });
 });
 
+const resetEffects = () => {
+  photoPreview.classList = '';
+  photoPreview.style.transform = '';
+};
+
+export {resetEffects};
