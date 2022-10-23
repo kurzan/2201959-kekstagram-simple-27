@@ -1,5 +1,6 @@
 import './thumbnails.js';
 import {commentValidate, uploadPictureForm} from './form-validate.js';
+import {isEscKey} from './util.js';
 
 const pictureEditForm = document.querySelector('.img-upload__overlay');
 const uploadPictureButton = document.querySelector('#upload-file');
@@ -7,7 +8,7 @@ const closeEditFormButton = document.querySelector('.img-upload__cancel');
 
 //Закрытие формы по ESC
 const onEscDowm = (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEscKey(evt)) {
     closeEditForm();
   }
 };
@@ -26,6 +27,7 @@ function closeEditForm () {
   pictureEditForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
+  uploadPictureButton.value = '';
   document.removeEventListener('keydown', onEscDowm);
   uploadPictureForm.removeEventListener('submit', commentValidate);
 }
