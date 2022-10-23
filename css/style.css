@@ -283,7 +283,7 @@ main {
 }
 
 /* стиль для ошибки проверки комментария */
-.form_comment_error {
+.img-upload__text__error {
   display: block;
   font-size: 0.85em;
   color: #c00;

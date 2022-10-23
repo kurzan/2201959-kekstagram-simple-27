@@ -4,7 +4,7 @@ const pristine = new Pristine(uploadPictureForm, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
   errorTextTag: 'span',
-  errorTextClass: 'form_comment_error',
+  errorTextClass: 'img-upload__text__error',
 });
 
 const commentValidate = (evt) => {
