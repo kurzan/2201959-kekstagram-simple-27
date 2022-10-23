@@ -16,4 +16,7 @@ const checkMaxCommentLength = (comment, maxLength) => comment.length <= maxLengt
 //Получение случайного элемента массива
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
-export {getRandomNumber, checkMaxCommentLength, getRandomArrayElement};
+//Проверка кнопки ESC
+const isEscKey = (evt) => evt.key === 'Escape';
+
+export {getRandomNumber, checkMaxCommentLength, getRandomArrayElement, isEscKey};
