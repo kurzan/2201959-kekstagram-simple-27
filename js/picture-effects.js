@@ -5,89 +5,77 @@ const sliderContainer = document.querySelector('.effect-level');
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderValue = document.querySelector('.effect-level__value');
 
-sliderContainer.style.display = 'none';
+sliderContainer.classList.add('hidden');
+
 let currentEffect = '';
-let currentSuffix = '';
+let currentPostfix = '';
 const DEFAULT_START = 100;
 
 const sliderOptions = {
-  'none': {
+  none: {
     range: {
       min: 0,
       max: 100,
     },
     step: 1,
-    suffix: '',
-    display: 'none',
+    postfix: '',
   },
-  'chrome': {
+  chrome: {
     range: {
       min: 0,
       max: 1,
     },
     step: 0.1,
     filter: 'grayscale',
-    suffix: '',
-    display: 'block',
+    postfix: '',
   },
-  'sepia': {
+  sepia: {
     range: {
       min: 0,
       max: 1,
     },
     step: 0.1,
     filter: 'sepia',
-    suffix: '',
-    display: 'block',
+    postfix: '',
   },
-  'marvin': {
+  marvin: {
     range: {
       min: 0,
       max: 100,
     },
     step: 1,
     filter: 'invert',
-    suffix: '%',
-    display: 'block',
+    postfix: '%',
   },
-  'phobos': {
+  phobos: {
     range: {
       min: 0,
       max: 3,
     },
     step: 0.1,
     filter: 'blur',
-    suffix: 'px',
-    display: 'block',
+    postfix: 'px',
   },
-  'heat': {
+  heat: {
     range: {
       min: 1,
       max: 3,
     },
     step: 0.1,
     filter: 'brightness',
-    suffix: '',
-    display: 'block',
+    postfix: '',
   },
-
-
 };
 
-const updateSliderOptions = ({range: {min, max}, step, filter, suffix, display}) => {
+const updateSliderOptions = ({range, step, filter, postfix}) => {
   currentEffect = filter;
-  currentSuffix = suffix;
+  currentPostfix = postfix;
 
   sliderElement.noUiSlider.updateOptions({
-    range: {
-      min: min,
-      max: max
-    },
+    range: range,
     step: step,
     start: DEFAULT_START,
   });
-
-  sliderContainer.style.display = display;
 };
 
 
@@ -106,32 +94,44 @@ noUiSlider.create(sliderElement, {
 sliderElement.noUiSlider.on('update', () => {
   const value = sliderElement.noUiSlider.get();
 
-  photoPreview.style.filter = `${currentEffect}(${value}${currentSuffix})`;
+  photoPreview.style.filter = `${currentEffect}(${value}${currentPostfix})`;
   sliderValue.setAttribute('value', value);
 });
 
-//Сброс эффектов
+//Скрытие слайдера
+const hideSlider = () => {
+  sliderContainer.classList.add('hidden');
+};
+
+//Показ слайдера
+const showSlider = () => {
+  sliderContainer.classList.remove('hidden');
+};
+
+//Сброс эффектов и скрытие слайдера
 const resetEffects = () => {
   photoPreview.classList = '';
   photoPreview.style.transform = '';
   photoPreview.style.filter = '';
 
+  hideSlider();
   updateSliderOptions(sliderOptions.none);
 };
-
 
 //Смена эффекта
 const changeEffect = (evt) => {
   photoPreview.classList = '';
   photoPreview.style.filter = '';
   if (evt.target.value !== 'none') {
+    showSlider();
     photoPreview.classList.add(`effects__preview--${evt.target.value}`);
+    updateSliderOptions(sliderOptions[evt.target.value]);
+  } else {
+    hideSlider();
   }
-
-  updateSliderOptions(sliderOptions[evt.target.value]);
 };
 
-effectsList.addEventListener('click', changeEffect);
+effectsList.addEventListener('change', changeEffect);
 
 
 export {resetEffects};
