@@ -1,3 +1,5 @@
+import './thumbnails.js';
+
 //Форма загрузки и редактирования фото
 import './upload-popup.js';
 
@@ -6,3 +8,5 @@ import './picture-scale.js';
 
 //Изменение эффекта на изображении
 import './picture-effects.js';
+
+
