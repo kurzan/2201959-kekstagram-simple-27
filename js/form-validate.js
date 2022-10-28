@@ -8,8 +8,19 @@ const pristine = new Pristine(uploadPictureForm, {
 });
 
 const commentValidate = (evt) => {
-  if (!pristine.validate()) {
-    evt.preventDefault();
+  evt.preventDefault();
+
+  const IsValid = pristine.validate();
+
+  if (IsValid) {
+    const formData = new FormData(evt.target);
+    fetch(
+      'https://27.javascript.pages.academy/kekstagram-simple',
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
   }
 };
 
