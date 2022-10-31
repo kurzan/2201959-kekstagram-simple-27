@@ -1,3 +1,7 @@
+import {sendData} from './api.js';
+import {showAlert} from './alerts.js';
+import {closeEditForm} from './upload-popup.js';
+
 const uploadPictureForm = document.querySelector('.img-upload__form');
 
 const pristine = new Pristine(uploadPictureForm, {
@@ -14,12 +18,13 @@ const commentValidate = (evt) => {
 
   if (IsValid) {
     const formData = new FormData(evt.target);
-    fetch(
-      'https://27.javascript.pages.academy/kekstagram-simple',
-      {
-        method: 'POST',
-        body: formData,
-      }
+    sendData(
+      () => {
+        closeEditForm();
+        showAlert('success');
+      },
+      () => showAlert('error'),
+      formData
     );
   }
 };

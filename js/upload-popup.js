@@ -44,4 +44,4 @@ closeEditFormButton.addEventListener('click', () => {
   closeEditForm();
 });
 
-export {uploadPictureForm};
+export {uploadPictureForm, closeEditForm};
