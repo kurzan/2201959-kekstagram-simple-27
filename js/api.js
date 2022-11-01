@@ -1,8 +1,7 @@
-const PICTURES_URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
-const SEND_DATA_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
+const API_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
 //Получение данных
-const getData = (onSuccess, onError) => fetch(PICTURES_URL)
+const getData = (onSuccess, onError) => fetch(`${API_URL}/data`)
   .then((response) => response.json())
   .then((descriptions) => {
     onSuccess(descriptions);
@@ -14,7 +13,7 @@ const getData = (onSuccess, onError) => fetch(PICTURES_URL)
 //Отправка данных
 const sendData = (onSucces, onError, body) => {
   fetch(
-    SEND_DATA_URL,
+    API_URL,
     {
       method: 'POST',
       body,
@@ -22,10 +21,10 @@ const sendData = (onSucces, onError, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSucces();
-      } else {
-        onError();
+        return onSucces();
       }
+
+      onError();
     })
     .catch(onError);
 };

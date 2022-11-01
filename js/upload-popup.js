@@ -24,14 +24,16 @@ function openEditForm () {
 
 //Функция закрывающая форму редактирования фото
 function closeEditForm () {
-  pictureEditForm.classList.add('hidden');
-  document.body.classList.remove('modal-open');
+  if (!document.body.contains(document.querySelector('.error'))) {
+    pictureEditForm.classList.add('hidden');
+    document.body.classList.remove('modal-open');
 
-  resetEffects();
-  uploadPictureForm.reset();
+    resetEffects();
+    uploadPictureForm.reset();
 
-  document.removeEventListener('keydown', onEscDowm);
-  uploadPictureForm.removeEventListener('submit', commentValidate);
+    document.removeEventListener('keydown', onEscDowm);
+    uploadPictureForm.removeEventListener('submit', commentValidate);
+  }
 }
 
 //обрабочик на кнопку Загрузить
