@@ -1,12 +1,5 @@
 import {photoPreview} from './picture-scale.js';
 
-const effectsList = document.querySelector('.effects__list');
-const sliderContainer = document.querySelector('.effect-level');
-const sliderElement = document.querySelector('.effect-level__slider');
-const sliderValue = document.querySelector('.effect-level__value');
-
-sliderContainer.classList.add('hidden');
-
 const DEFAULT_START = 100;
 
 const SLIDER_OPTIONS = {
@@ -65,6 +58,13 @@ const SLIDER_OPTIONS = {
   },
 };
 
+const effectsListElement = document.querySelector('.effects__list');
+const sliderContainerElement = document.querySelector('.effect-level');
+const sliderElement = document.querySelector('.effect-level__slider');
+const sliderValue = document.querySelector('.effect-level__value');
+
+sliderContainerElement.classList.add('hidden');
+
 let currentEffect = '';
 let currentPostfix = '';
 
@@ -100,12 +100,12 @@ sliderElement.noUiSlider.on('update', () => {
 
 //Скрытие слайдера
 const hideSlider = () => {
-  sliderContainer.classList.add('hidden');
+  sliderContainerElement.classList.add('hidden');
 };
 
 //Показ слайдера
 const showSlider = () => {
-  sliderContainer.classList.remove('hidden');
+  sliderContainerElement.classList.remove('hidden');
 };
 
 //Сброс эффектов и скрытие слайдера
@@ -131,7 +131,7 @@ const onChangeEffect = (evt) => {
   }
 };
 
-effectsList.addEventListener('change', onChangeEffect);
+effectsListElement.addEventListener('change', onChangeEffect);
 
 
 export {resetEffects};
