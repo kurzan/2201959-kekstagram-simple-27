@@ -9,5 +9,3 @@ import './picture-scale.js';
 
 //Изменение эффекта на изображении
 import './picture-effects.js';
-
-
