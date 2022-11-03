@@ -1,4 +1,4 @@
-import {commentValidate, uploadPictureForm} from './form-validate.js';
+import {onFormSubmitButton, uploadPictureForm, pristine} from './form-validate.js';
 import {isEscKey} from './util.js';
 import {resetEffects} from './picture-effects.js';
 
@@ -7,7 +7,7 @@ const uploadPictureButton = document.querySelector('#upload-file');
 const closeEditFormButton = document.querySelector('.img-upload__cancel');
 
 //Закрытие формы по ESC
-const onEscDowm = (evt) => {
+const onEscDown = (evt) => {
   if (isEscKey(evt)) {
     closeEditForm();
   }
@@ -18,8 +18,8 @@ function openEditForm () {
   pictureEditForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
-  document.addEventListener('keydown', onEscDowm);
-  uploadPictureForm.addEventListener('submit', commentValidate);
+  document.addEventListener('keydown', onEscDown);
+  uploadPictureForm.addEventListener('submit', onFormSubmitButton);
 }
 
 //Функция закрывающая форму редактирования фото
@@ -30,9 +30,10 @@ function closeEditForm () {
 
     resetEffects();
     uploadPictureForm.reset();
+    pristine.reset();
 
-    document.removeEventListener('keydown', onEscDowm);
-    uploadPictureForm.removeEventListener('submit', commentValidate);
+    document.removeEventListener('keydown', onEscDown);
+    uploadPictureForm.removeEventListener('submit', onFormSubmitButton);
   }
 }
 

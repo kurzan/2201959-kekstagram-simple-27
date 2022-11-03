@@ -12,7 +12,7 @@ function setPictureScale() {
   photoPreview.style.transform = `scale(${currentValue / 100})`;
 }
 
-const setSmallerValue = () => {
+const onDescreaseScale = () => {
   const currentScaleValue = parseFloat(scaleValue.value);
   if (currentScaleValue > MIN_SCALE_VALUE) {
     scaleValue.value = `${currentScaleValue - SCALE_STEP}%`;
@@ -21,7 +21,7 @@ const setSmallerValue = () => {
   }
 };
 
-const setBiggerValue = () => {
+const onIncreaseScale = () => {
   const currentScaleValue = parseFloat(scaleValue.value);
   if (currentScaleValue < MAX_SCALE_VALUE) {
     scaleValue.value = `${currentScaleValue + SCALE_STEP}%`;
@@ -30,8 +30,8 @@ const setBiggerValue = () => {
   }
 };
 
-smallerButton.addEventListener('click', setSmallerValue);
-biggerButton.addEventListener('click', setBiggerValue);
+smallerButton.addEventListener('click', onDescreaseScale);
+biggerButton.addEventListener('click', onIncreaseScale);
 
 
 export {photoPreview};
