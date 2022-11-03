@@ -1,6 +1,6 @@
 import {isEscKey} from './util.js';
 
-
+//Функция вызова алерта, в зависимости от типа алерта.
 const showAlert = (alert) => {
   const alertTemplate = document.querySelector(`#${alert}`).content.querySelector(`.${alert}`);
   const alertElement = alertTemplate.cloneNode(true);
@@ -13,11 +13,11 @@ const showAlert = (alert) => {
 
     alertButton.removeEventListener('click', onCloseAlertElement);
     document.removeEventListener('click', onOutClick);
-    document.removeEventListener('keydown', onEscDowm);
+    document.removeEventListener('keydown', onEscDown);
   }
 
   //закрытие по ESC
-  function onEscDowm (evt) {
+  function onEscDown (evt) {
     if (isEscKey(evt)) {
       onCloseAlertElement();
     }
@@ -32,7 +32,7 @@ const showAlert = (alert) => {
 
   alertButton.addEventListener('click', onCloseAlertElement);
   document.addEventListener('click', onOutClick);
-  document.addEventListener('keydown', onEscDowm);
+  document.addEventListener('keydown', onEscDown);
 
   document.body.appendChild(alertElement);
 };
