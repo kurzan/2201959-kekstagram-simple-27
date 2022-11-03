@@ -2,8 +2,8 @@ import {sendData} from './api.js';
 import {showAlert} from './alerts.js';
 import {closeEditForm} from './upload-popup.js';
 
-const uploadPictureForm = document.querySelector('.img-upload__form');
-const uploadButton = uploadPictureForm.querySelector('#upload-submit');
+const uploadPictureElement = document.querySelector('.img-upload__form');
+const uploadButton = uploadPictureElement.querySelector('#upload-submit');
 
 //Блокировка кнопки отправки формы
 const blockSubmitButton = () => {
@@ -18,7 +18,7 @@ const unblockSubmitButton = () => {
 };
 
 //Создание экземплра пристин
-const pristine = new Pristine(uploadPictureForm, {
+const pristine = new Pristine(uploadPictureElement, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
   errorTextTag: 'span',
@@ -49,4 +49,4 @@ const onFormSubmitButton = (evt) => {
   }
 };
 
-export {uploadPictureForm, onFormSubmitButton, pristine};
+export {uploadPictureElement, onFormSubmitButton, pristine};
