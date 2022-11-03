@@ -2,7 +2,7 @@ import {getData} from './api.js';
 import {showAlert} from './util.js';
 
 //находим контейнер для миниматюр
-const picturesContainer = document.querySelector('.pictures');
+const picturesContainerElement = document.querySelector('.pictures');
 
 //находим шаблон для минатюр
 const pictureTemplate = document.querySelector('#picture')
@@ -23,7 +23,7 @@ const renderSimilarPictures = (descriptions) => {
   });
 
   //добавленяем фрагмент к основному контейнеру с миниатюрами
-  picturesContainer.appendChild(picturesFragment);
+  picturesContainerElement.appendChild(picturesFragment);
 };
 
 getData(renderSimilarPictures, showAlert);
