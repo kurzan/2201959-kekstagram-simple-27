@@ -1,5 +1,8 @@
 import {getData} from './api.js';
+import { showFilter } from './filters.js';
 import {showAlert} from './util.js';
+
+const filterElement = document.querySelector('.img-filters');
 
 //находим контейнер для миниматюр
 const picturesContainer = document.querySelector('.pictures');
@@ -26,4 +29,6 @@ const renderSimilarPictures = (descriptions) => {
   picturesContainer.appendChild(picturesFragment);
 };
 
-getData(renderSimilarPictures, showAlert);
+
+getData(renderSimilarPictures, showAlert)
+  .then(showFilter);
