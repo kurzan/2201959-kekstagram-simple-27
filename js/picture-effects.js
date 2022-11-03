@@ -7,11 +7,9 @@ const sliderValue = document.querySelector('.effect-level__value');
 
 sliderContainer.classList.add('hidden');
 
-let currentEffect = '';
-let currentPostfix = '';
 const DEFAULT_START = 100;
 
-const sliderOptions = {
+const SLIDER_OPTIONS = {
   none: {
     range: {
       min: 0,
@@ -67,6 +65,9 @@ const sliderOptions = {
   },
 };
 
+let currentEffect = '';
+let currentPostfix = '';
+
 const updateSliderOptions = ({range, step, filter, postfix}) => {
   currentEffect = filter;
   currentPostfix = postfix;
@@ -77,7 +78,6 @@ const updateSliderOptions = ({range, step, filter, postfix}) => {
     start: DEFAULT_START,
   });
 };
-
 
 //Создание слайдера
 noUiSlider.create(sliderElement, {
@@ -115,23 +115,23 @@ const resetEffects = () => {
   photoPreview.style.filter = '';
 
   hideSlider();
-  updateSliderOptions(sliderOptions.none);
+  updateSliderOptions(SLIDER_OPTIONS.none);
 };
 
 //Смена эффекта
-const changeEffect = (evt) => {
+const onChangeEffect = (evt) => {
   photoPreview.classList = '';
   photoPreview.style.filter = '';
   if (evt.target.value !== 'none') {
     showSlider();
     photoPreview.classList.add(`effects__preview--${evt.target.value}`);
-    updateSliderOptions(sliderOptions[evt.target.value]);
+    updateSliderOptions(SLIDER_OPTIONS[evt.target.value]);
   } else {
     hideSlider();
   }
 };
 
-effectsList.addEventListener('change', changeEffect);
+effectsList.addEventListener('change', onChangeEffect);
 
 
 export {resetEffects};

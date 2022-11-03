@@ -5,16 +5,19 @@ import {closeEditForm} from './upload-popup.js';
 const uploadPictureForm = document.querySelector('.img-upload__form');
 const uploadButton = uploadPictureForm.querySelector('#upload-submit');
 
+//Блокировка кнопки отправки формы
 const blockSubmitButton = () => {
   uploadButton.disabled = true;
   uploadButton.textContent = 'Идет отправка...';
 };
 
+//Разблокировка кнопки отправки формы
 const unblockSubmitButton = () => {
   uploadButton.disabled = false;
   uploadButton.textContent = 'Опубликовать';
 };
 
+//Создание экземплра пристин
 const pristine = new Pristine(uploadPictureForm, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
@@ -22,12 +25,13 @@ const pristine = new Pristine(uploadPictureForm, {
   errorTextClass: 'img-upload__text__error',
 });
 
-const commentValidate = (evt) => {
+//Действия при нажатии на кнопку отправки формы
+const onFormSubmitButton = (evt) => {
   evt.preventDefault();
 
-  const IsValid = pristine.validate();
+  const isValid = pristine.validate();
 
-  if (IsValid) {
+  if (isValid) {
     blockSubmitButton();
     const formData = new FormData(evt.target);
     sendData(
@@ -45,4 +49,4 @@ const commentValidate = (evt) => {
   }
 };
 
-export {uploadPictureForm, commentValidate};
+export {uploadPictureForm, onFormSubmitButton, pristine};
