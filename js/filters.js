@@ -1,19 +1,28 @@
 import {createSimilarPictures} from './thumbnails.js';
+import {debounce} from './util.js';
 
 const NUMBER_OF_RANDOM_PHOTOS = 10;
+const RERENDER_DELAY = 500;
+
+const FILTERS = {
+  'filter-default': setDefaultFilter,
+  'filter-random': setRandomFilter,
+  'filter-discussed': setDiscussedFilter,
+};
 
 const filterElement = document.querySelector('.img-filters');
 
-const defaulFilterButton = document.querySelector('#filter-default');
-const randomFilterButton = document.querySelector('#filter-random');
-const discussedFilterButton = document.querySelector('#filter-discussed');
+function setDefaultFilter (descriptions) {
+  return descriptions;
+}
 
-const setDefaultFilter = (descriptions) => descriptions;
+function setRandomFilter (descriptions) {
+  return descriptions.slice().sort(() => Math.random() - Math.random()).slice(0, NUMBER_OF_RANDOM_PHOTOS);
+}
 
-const setRandomFilter = (descriptions) => descriptions.slice().sort(() => Math.random() - Math.random()).slice(0, NUMBER_OF_RANDOM_PHOTOS);
-
-const setDiscussedFilter = (descriptions) => descriptions.slice().sort((a, b) => b.comments - a.comments);
-
+function setDiscussedFilter (descriptions) {
+  return descriptions.slice().sort((a, b) => b.comments - a.comments);
+}
 
 const removePhotos = () => {
   document.querySelectorAll('.picture').forEach((picture) => picture.remove());
@@ -24,36 +33,21 @@ const removeActiveClass = () => {
   activeButton.classList.remove('img-filters__button--active');
 };
 
+
 //Работа фильтров
 const activateFilter = (descriptions) => {
   filterElement.classList.remove('img-filters--inactive');
 
-  defaulFilterButton.addEventListener('click', (evt) => {
-    removeActiveClass();
-    if (evt.target === defaulFilterButton) {
-      defaulFilterButton.classList.add('img-filters__button--active');
+  const changeFilter = (evt) => {
+    if (evt.target.classList.contains('img-filters__button')) {
+      removeActiveClass();
       removePhotos();
-      createSimilarPictures(setDefaultFilter(descriptions));
+      evt.target.classList.add('img-filters__button--active');
+      createSimilarPictures(FILTERS[evt.target.id](descriptions));
     }
-  });
+  };
 
-  randomFilterButton.addEventListener('click', (evt) => {
-    removeActiveClass();
-    if (evt.target === randomFilterButton) {
-      randomFilterButton.classList.add('img-filters__button--active');
-      removePhotos();
-      createSimilarPictures(setRandomFilter(descriptions));
-    }
-  });
-
-  discussedFilterButton.addEventListener('click', (evt) => {
-    removeActiveClass();
-    if (evt.target === discussedFilterButton) {
-      discussedFilterButton.classList.add('img-filters__button--active');
-      removePhotos();
-      createSimilarPictures(setDiscussedFilter(descriptions));
-    }
-  });
+  filterElement.addEventListener('click', debounce(changeFilter, RERENDER_DELAY));
 };
 
 export {activateFilter};
